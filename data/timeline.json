@@ -1,0 +1,82 @@
+[
+  {
+    "id": "wright-flyer",
+    "year": "1903",
+    "title": "Wright Brothers",
+    "subtitle": "Wright Flyer I",
+    "model": "models/1903WrightFlyer.glb",
+    "layout": "text-left",
+    "summary": "Orville and Wilbur Wright completed the first successful powered, heavier-than-air controlled flight near Kitty Hawk, North Carolina.",
+    "stats": [
+      { "label": "Date", "value": "Dec 17, 1903" },
+      { "label": "Duration", "value": "12 seconds" },
+      { "label": "Distance", "value": "120 feet" }
+    ],
+    "details": "Constructed from spruce wood and unbleached muslin, powered by an aluminum-block 12 hp engine built by Charles Taylor."
+  },
+  {
+    "id": "spirit-of-st-louis",
+    "year": "1927",
+    "title": "Spirit of St. Louis",
+    "subtitle": "Ryan NYP Monoplane",
+    "model": "models/SpiritOfStLouis.glb",
+    "layout": "model-left",
+    "summary": "Charles Lindbergh made the historic first solo nonstop transatlantic flight from Roosevelt Field, New York to Le Bourget Field in Paris.",
+    "stats": [
+      { "label": "Date", "value": "May 20–21, 1927" },
+      { "label": "Duration", "value": "33.5 hours" },
+      { "label": "Distance", "value": "3,610 miles" }
+    ],
+    "details": "Fuel tanks were installed in front of the cockpit to maintain balance as fuel burned, requiring a periscope to see directly ahead."
+  },
+  {
+    "id": "bell-x1",
+    "year": "1947",
+    "title": "Bell X-1",
+    "subtitle": "Experimental Rocket Plane",
+    "model": "models/bell_x1.glb",
+    "layout": "text-left",
+    "summary": "Captain Charles 'Chuck' Yeager broke the sound barrier for the first time in level flight over Rogers Dry Lake in California.",
+    "stats": [
+      { "label": "Date", "value": "Oct 14, 1947" },
+      { "label": "Speed", "value": "Mach 1.06 (700 mph)" },
+      { "label": "Altitude", "value": "43,000 feet" }
+    ],
+    "details": "Nicknamed 'Glamorous Glennis', the aircraft fuselage was inspired by the shape of a .50-caliber browning bullet known to be aerodynamically stable.",
+    "hotspots": [
+      {
+        "slot": "hotspot-1",
+        "position": "3877.952136217219m 9.264772934513871m -548.5146851082523m",
+        "normal": "0.010331225126509573m 0.9952583515776062m 0.0967164898164295m",
+        "label": "wing tip"
+      },
+      {
+        "slot": "hotspot-2",
+        "position": "-212.01442305928867m 1057.0928352721533m 3512.194045999083m",
+        "normal": "-0.9969810512408077m 0.03687389604313802m 0.06833080752759976m",
+        "label": "tail"
+      },
+      {
+        "slot": "hotspot-3",
+        "position": "-517.1752242687689m 455.4582946740086m -3700.635666978802m",
+        "normal": "-0.634186782188784m 0.7376673788981459m -0.23163325194491197m",
+        "label": "cockpit"
+      }
+    ]
+  },
+  {
+    "id": "space-shuttle",
+    "year": "1981",
+    "title": "Space Shuttle",
+    "subtitle": "NASA Orbiter Fleet",
+    "model": "models/Orbiter_Space_Shuttle.glb",
+    "layout": "model-left",
+    "summary": "NASA launched the first Space Transportation System flight (STS-1), pioneering the first reusable orbital winged spacecraft.",
+    "stats": [
+      { "label": "First Flight", "value": "Apr 12, 1981" },
+      { "label": "Orbital Speed", "value": "17,500 mph" },
+      { "label": "Payload", "value": "Up to 65,000 lbs" }
+    ],
+    "details": "Equipped with over 24,000 ceramic thermal tiles designed to withstand 1,260°C (2,300°F) re-entry heat as it glided back to a runway landing."
+  }
+]

@@ -1,0 +1,463 @@
+/* ==========================================================================
+   History of Flight - Timeline Prototype Stylesheet
+   Minimal mid-fidelity design with light gray background and orange accents.
+   ========================================================================== */
+
+/* 1. Global Reset & Variables */
+:root {
+  --bg-page: #f5f6f8;
+  --bg-card: #ffffff;
+  --bg-subtle: #eeeff3;
+  --text-main: #1e242c;
+  --text-muted: #5e6774;
+  --text-light: #8892a0;
+
+  /* Orange accent palette */
+  --accent-orange: #f26419;
+  --accent-orange-hover: #d94e09;
+  --accent-orange-light: #fff2ea;
+  --accent-orange-border: #fbc6a6;
+
+  /* Gray & line borders */
+  --border-card: #dbe0e8;
+  --line-timeline: #cbd2dc;
+
+  /* Typography & spacing */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --radius-card: 10px;
+  --radius-badge: 6px;
+  --shadow-subtle: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px;
+}
+
+/* 2. Header Section */
+.site-header {
+  text-align: center;
+  padding: 48px 20px 32px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.site-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.site-title .accent {
+  color: var(--accent-orange);
+}
+
+.site-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto 18px auto;
+}
+
+/* Quick jump navigation for prototype */
+.timeline-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.nav-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-pill:hover,
+.nav-pill:focus {
+  background-color: var(--accent-orange-light);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+}
+
+/* 3. Timeline Layout */
+.timeline-container {
+  position: relative;
+  max-width: 1080px;
+  margin: 20px auto 0 auto;
+  padding: 0 20px;
+}
+
+/* Central vertical spine line */
+.timeline-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background-color: var(--line-timeline);
+  transform: translateX(-50%);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+/* Individual timeline milestone row */
+.timeline-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 90px;
+  min-height: 480px;
+}
+
+.timeline-row:last-child {
+  margin-bottom: 40px;
+}
+
+/* Left & Right columns */
+.timeline-col {
+  width: 45%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Node in center of spine */
+.timeline-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  background-color: #ffffff;
+  border: 3px solid var(--accent-orange);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 0 4px var(--bg-page);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.timeline-row:hover .timeline-node {
+  transform: translate(-50%, -50%) scale(1.25);
+  background-color: var(--accent-orange);
+}
+
+/* Horizontal branch connector line matching the sketch */
+.timeline-branch {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  background-color: var(--line-timeline);
+  z-index: 2;
+  transition: background-color 0.2s ease;
+}
+
+/* When text is on the left, branch extends from node to left text */
+.timeline-row.layout-text-left .timeline-branch {
+  right: 50%;
+  width: 5%;
+}
+
+/* When text is on the right, branch extends from node to right text */
+.timeline-row.layout-model-left .timeline-branch {
+  left: 50%;
+  width: 5%;
+}
+
+.timeline-row:hover .timeline-branch {
+  background-color: var(--accent-orange);
+}
+
+/* 4. Text Card Styles */
+.timeline-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 26px;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-card:hover {
+  border-color: var(--accent-orange-border);
+  box-shadow: 0 6px 18px rgba(242, 100, 25, 0.08);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-year {
+  display: inline-block;
+  background-color: var(--accent-orange-light);
+  color: var(--accent-orange);
+  border: 1px solid var(--accent-orange-border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-badge);
+  letter-spacing: 0.05em;
+}
+
+.card-step-num {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.card-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.card-summary {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 18px;
+}
+
+/* Stats / Specs grid */
+.card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+  background-color: var(--bg-page);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-card);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.card-details {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border-card);
+  padding-top: 12px;
+  line-height: 1.45;
+}
+
+/* 5. Frameless 3D Model Viewer (Larger models floating cleanly on page) */
+.timeline-col.col-model {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-view-area {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  background: transparent;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  background-color: transparent;
+  --poster-color: transparent;
+  cursor: grab;
+}
+
+model-viewer:active {
+  cursor: grabbing;
+}
+
+/* Subtle loading slot */
+.model-poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  background: transparent;
+}
+
+/* 3D Model Hotspots & Annotations */
+.Hotspot {
+  background: #ffffff;
+  border-radius: 50%;
+  border: 2px solid var(--accent-orange);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  position: relative;
+}
+
+.Hotspot:hover,
+.Hotspot:focus {
+  background-color: var(--accent-orange);
+  transform: scale(1.3);
+  outline: none;
+}
+
+.HotspotAnnotation {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 4px;
+  border: 1px solid var(--border-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: var(--text-main);
+  display: block;
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 140px;
+  padding: 3px 8px;
+  position: absolute;
+  text-transform: capitalize;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Hide annotation when model is occluding hotspot */
+.Hotspot:not([data-visible]) {
+  opacity: 0.25;
+}
+
+/* 6. Footer */
+.site-footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-card);
+  margin-top: 40px;
+}
+
+/* 7. Responsive Styles for Tablets & Mobile */
+@media (max-width: 820px) {
+  .site-title {
+    font-size: 1.6rem;
+  }
+
+  /* Shift vertical spine to the left side */
+  .timeline-spine {
+    left: 28px;
+    transform: none;
+  }
+
+  .timeline-row {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 50px;
+    padding-left: 56px;
+    min-height: auto;
+  }
+
+  .timeline-col {
+    width: 100%;
+  }
+
+  /* Ensure text is always on top on mobile, model below */
+  .timeline-row.layout-model-left {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .timeline-col.col-model {
+    margin-top: 16px;
+  }
+
+  .timeline-node {
+    left: 28px;
+    top: 24px;
+    transform: translate(-50%, 0);
+  }
+
+  .timeline-row:hover .timeline-node {
+    transform: translate(-50%, 0) scale(1.2);
+  }
+
+  /* Connector line from left spine to content */
+  .timeline-branch {
+    top: 32px;
+    left: 28px !important;
+    right: auto !important;
+    width: 28px !important;
+  }
+
+  .model-view-area {
+    height: 340px;
+  }
+
+  .card-stats {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    border-bottom: 1px solid #e2e5eb;
+    padding-bottom: 4px;
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}

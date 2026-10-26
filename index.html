@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History of Flight — Interactive Timeline Prototype</title>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Model Viewer Web Component for 3D GLB/GLTF Models -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- Page Header matching sketch -->
+  <header class="site-header">
+    <h1 class="site-title">History <span class="accent">of</span> Flight</h1>
+    <p class="site-subtitle">
+      A chronological timeline of milestones in human aviation. Scroll through the timeline to rotate and observe each 3D aircraft.
+    </p>
+
+    <!-- Interactive Jump Navigation (populated from JSON) -->
+    <nav id="timeline-nav" class="timeline-nav" aria-label="Flight milestones"></nav>
+  </header>
+
+  <!-- Central Timeline Section -->
+  <main class="timeline-container">
+    <!-- Continuous Vertical Spine Line -->
+    <div class="timeline-spine" aria-hidden="true"></div>
+
+    <!-- Rows injected dynamically from data/timeline.json -->
+    <div id="timeline-rows"></div>
+  </main>
+
+  <!-- Simple Prototype Footer -->
+  <footer class="site-footer">
+    <p>History of Flight Prototype · 3D models rendered via &lt;model-viewer&gt;</p>
+  </footer>
+
+  <!-- Main JavaScript Logic -->
+  <script src="js/main.js"></script>
+</body>
+</html>
