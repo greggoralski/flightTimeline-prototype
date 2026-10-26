@@ -377,6 +377,45 @@ model-viewer:active {
   opacity: 0.25;
 }
 
+/* Active selected hotspot */
+.Hotspot.is-active {
+  background-color: var(--accent-orange);
+  box-shadow: 0 0 0 4px var(--accent-orange-light), 0 2px 8px rgba(242, 100, 25, 0.4);
+  transform: scale(1.35);
+}
+
+.Hotspot.is-active .HotspotAnnotation {
+  background: var(--text-main);
+  color: #ffffff;
+  border-color: var(--text-main);
+}
+
+/* Hotspot active badge & reset button in card header */
+.hotspot-active-badge {
+  background-color: var(--accent-orange);
+  color: #ffffff;
+  border-color: var(--accent-orange);
+}
+
+.card-reset-btn {
+  background: transparent;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-badge);
+  padding: 3px 8px;
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-reset-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--accent-orange);
+  border-color: var(--accent-orange-border);
+}
+
 /* 6. Footer */
 .site-footer {
   text-align: center;

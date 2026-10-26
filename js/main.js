@@ -59,19 +59,46 @@ const FALLBACK_DATA = [
         slot: "hotspot-1",
         position: "3877.952136217219m 9.264772934513871m -548.5146851082523m",
         normal: "0.010331225126509573m 0.9952583515776062m 0.0967164898164295m",
-        label: "wing tip"
+        label: "wing tip",
+        title: "Thin High-Speed Airfoil",
+        subtitle: "Super-thin straight wing design",
+        summary: "The X-1 featured an exceptionally thin, straight wing (8% thickness-to-chord ratio) designed to prevent shockwave buildup when approaching supersonic speeds.",
+        stats: [
+          { label: "Span", value: "28.0 ft" },
+          { label: "Area", value: "130 sq ft" },
+          { label: "Profile", value: "8% Thickness" }
+        ],
+        details: "Machined from solid high-strength aluminum alloy instead of traditional sheet-rib construction to resist intense trans-sonic aeroelastic stresses."
       },
       {
         slot: "hotspot-2",
         position: "-212.01442305928867m 1057.0928352721533m 3512.194045999083m",
         normal: "-0.9969810512408077m 0.03687389604313802m 0.06833080752759976m",
-        label: "tail"
+        label: "tail",
+        title: "All-Moving Stabilizer",
+        subtitle: "Flying tail empennage",
+        summary: "Near Mach 1, shockwaves froze conventional elevators. Engineers introduced an adjustable all-moving horizontal stabilizer that allowed Chuck Yeager to retain pitch control.",
+        stats: [
+          { label: "Control", value: "All-moving" },
+          { label: "Engine", value: "XLR11 Rocket" },
+          { label: "Thrust", value: "6,000 lbf" }
+        ],
+        details: "Mounted high above the fuselage wake, the horizontal tail assembly proved to be the critical breakthrough that made breaking the sound barrier survivable."
       },
       {
         slot: "hotspot-3",
         position: "-517.1752242687689m 455.4582946740086m -3700.635666978802m",
         normal: "-0.634186782188784m 0.7376673788981459m -0.23163325194491197m",
-        label: "cockpit"
+        label: "cockpit",
+        title: "Steep Flush Cockpit",
+        subtitle: "Pressurized aerodynamic nose cone",
+        summary: "To preserve the bullet shape of a .50-caliber projectile, the cockpit had no protruding canopy; the pilot looked through stepped windscreen panes flush with the nose.",
+        stats: [
+          { label: "Pilot", value: "Chuck Yeager" },
+          { label: "Callsign", value: "Glamorous Glennis" },
+          { label: "Oxygen", value: "Diluter Demand" }
+        ],
+        details: "Yeager entered the cockpit mid-air after being dropped from the belly of a modified B-29 Superfortress mothership at 23,000 feet."
       }
     ]
   },
@@ -114,7 +141,7 @@ async function loadTimelineData() {
  */
 function createModelCardMarkup(item) {
   const hotspotsMarkup = (item.hotspots || []).map(h => `
-    <button class="Hotspot" slot="${h.slot}" data-position="${h.position}" data-normal="${h.normal}" data-visibility-attribute="visible">
+    <button class="Hotspot" slot="${h.slot}" data-slot="${h.slot}" data-item-id="${item.id}" data-position="${h.position}" data-normal="${h.normal}" data-visibility-attribute="visible">
       <div class="HotspotAnnotation">${h.label}</div>
     </button>
   `).join('');
@@ -156,7 +183,7 @@ function createTextCardMarkup(item, index) {
 
   return `
     <div class="timeline-col col-text">
-      <article class="timeline-card">
+      <article class="timeline-card" id="card-${item.id}">
         <div class="card-header">
           <span class="card-year">${item.year}</span>
           <span class="card-step-num">Milestone 0${index + 1}</span>
@@ -171,6 +198,98 @@ function createTextCardMarkup(item, index) {
       </article>
     </div>
   `;
+}
+
+/**
+ * Updates a timeline text card with hotspot-specific content (or resets to default)
+ */
+function updateCardContent(item, hotspotData, activeSlot) {
+  const card = document.getElementById(`card-${item.id}`);
+  if (!card) return;
+
+  const content = hotspotData || item;
+  const isHotspot = Boolean(hotspotData);
+
+  const statsMarkup = (content.stats || []).map(stat => `
+    <div class="stat-item">
+      <span class="stat-label">${stat.label}</span>
+      <span class="stat-value">${stat.value}</span>
+    </div>
+  `).join('');
+
+  const badgeMarkup = isHotspot
+    ? `<span class="card-year hotspot-active-badge">Hotspot: ${hotspotData.label}</span>`
+    : `<span class="card-year">${item.year}</span>`;
+
+  const resetMarkup = isHotspot
+    ? `<button class="card-reset-btn" data-reset-item="${item.id}" title="Reset to aircraft overview">✕ Overview</button>`
+    : '';
+
+  card.innerHTML = `
+    <div class="card-header">
+      ${badgeMarkup}
+      ${resetMarkup}
+    </div>
+    <h2 class="card-title">${content.title}</h2>
+    <div class="card-subtitle">${content.subtitle || ''}</div>
+    <p class="card-summary">${content.summary || ''}</p>
+    
+    ${statsMarkup ? `<div class="card-stats">${statsMarkup}</div>` : ''}
+    
+    ${content.details ? `<p class="card-details">${content.details}</p>` : ''}
+  `;
+
+  // Highlight active hotspot button visually on the model
+  const row = document.getElementById(item.id);
+  if (row) {
+    row.querySelectorAll('.Hotspot').forEach(btn => {
+      if (activeSlot && btn.getAttribute('data-slot') === activeSlot) {
+        btn.classList.add('is-active');
+      } else {
+        btn.classList.remove('is-active');
+      }
+    });
+  }
+}
+
+/**
+ * Setup click/tap interactions for 3D model hotspots
+ */
+function setupHotspotInteractions(items) {
+  const itemsMap = {};
+  items.forEach(item => {
+    itemsMap[item.id] = item;
+  });
+
+  // Listen for clicks on hotspots and reset buttons via event delegation
+  document.addEventListener('click', (e) => {
+    const hotspotBtn = e.target.closest('.Hotspot');
+    if (hotspotBtn) {
+      e.stopPropagation();
+      const itemId = hotspotBtn.getAttribute('data-item-id');
+      const slot = hotspotBtn.getAttribute('data-slot');
+      const item = itemsMap[itemId];
+
+      if (item && item.hotspots) {
+        const hotspotData = item.hotspots.find(h => h.slot === slot);
+        if (hotspotData) {
+          updateCardContent(item, hotspotData, slot);
+        }
+      }
+      return;
+    }
+
+    // Reset button clicked
+    const resetBtn = e.target.closest('[data-reset-item]');
+    if (resetBtn) {
+      e.stopPropagation();
+      const itemId = resetBtn.getAttribute('data-reset-item');
+      const item = itemsMap[itemId];
+      if (item) {
+        updateCardContent(item, null, null);
+      }
+    }
+  });
 }
 
 /**
@@ -225,6 +344,9 @@ function renderTimeline(items) {
     row.innerHTML = columnsHtml;
     container.appendChild(row);
   });
+
+  // Attach hotspot tap/click handlers
+  setupHotspotInteractions(items);
 }
 
 /**

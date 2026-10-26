@@ -48,19 +48,46 @@
         "slot": "hotspot-1",
         "position": "3877.952136217219m 9.264772934513871m -548.5146851082523m",
         "normal": "0.010331225126509573m 0.9952583515776062m 0.0967164898164295m",
-        "label": "wing tip"
+        "label": "wing tip",
+        "title": "Thin High-Speed Airfoil",
+        "subtitle": "Super-thin straight wing design",
+        "summary": "The X-1 featured an exceptionally thin, straight wing (8% thickness-to-chord ratio) designed to prevent shockwave buildup when approaching supersonic speeds.",
+        "stats": [
+          { "label": "Span", "value": "28.0 ft" },
+          { "label": "Area", "value": "130 sq ft" },
+          { "label": "Profile", "value": "8% Thickness" }
+        ],
+        "details": "Machined from solid high-strength aluminum alloy instead of traditional sheet-rib construction to resist intense trans-sonic aeroelastic stresses."
       },
       {
         "slot": "hotspot-2",
         "position": "-212.01442305928867m 1057.0928352721533m 3512.194045999083m",
         "normal": "-0.9969810512408077m 0.03687389604313802m 0.06833080752759976m",
-        "label": "tail"
+        "label": "tail",
+        "title": "All-Moving Stabilizer",
+        "subtitle": "Flying tail empennage",
+        "summary": "Near Mach 1, shockwaves froze conventional elevators. Engineers introduced an adjustable all-moving horizontal stabilizer that allowed Chuck Yeager to retain pitch control.",
+        "stats": [
+          { "label": "Control", "value": "All-moving" },
+          { "label": "Engine", "value": "XLR11 Rocket" },
+          { "label": "Thrust", "value": "6,000 lbf" }
+        ],
+        "details": "Mounted high above the fuselage wake, the horizontal tail assembly proved to be the critical breakthrough that made breaking the sound barrier survivable."
       },
       {
         "slot": "hotspot-3",
         "position": "-517.1752242687689m 455.4582946740086m -3700.635666978802m",
         "normal": "-0.634186782188784m 0.7376673788981459m -0.23163325194491197m",
-        "label": "cockpit"
+        "label": "cockpit",
+        "title": "Steep Flush Cockpit",
+        "subtitle": "Pressurized aerodynamic nose cone",
+        "summary": "To preserve the bullet shape of a .50-caliber projectile, the cockpit had no protruding canopy; the pilot looked through stepped windscreen panes flush with the nose.",
+        "stats": [
+          { "label": "Pilot", "value": "Chuck Yeager" },
+          { "label": "Callsign", "value": "Glamorous Glennis" },
+          { "label": "Oxygen", "value": "Diluter Demand" }
+        ],
+        "details": "Yeager entered the cockpit mid-air after being dropped from the belly of a modified B-29 Superfortress mothership at 23,000 feet."
       }
     ]
   },
